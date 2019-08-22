@@ -24,6 +24,11 @@
     <script>
 
         var debugMode = true;
+
+    /*
+
+    //  sw.js
+
         var serviceWorker = navigator.serviceWorker;
 
         if ( serviceWorker ) {
@@ -57,21 +62,22 @@
                     debugMode && console.log("new service worker update found:");
                     newSWController.addEventListener("statechange", function(){
                         debugMode && console.log({"new sw controller state": this.state});
-                        if ( this.state === "activated") { /* do something */ }
+                        if ( this.state === "activated") { 
+                            //  do something
+                        }
                     });
                 });
 
-        /*
             //  Refresh to activate the worker.
-                if (!reg.active) {
-                    location.reload(); return;
-                } 
-        */
+            //  if (!reg.active) {
+            //      location.reload(); return;
+            //  } 
 
             }).catch(function(err) { 
                 console.error(err);
             });
         }
+    */
 
     </script>
 

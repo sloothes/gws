@@ -31,6 +31,16 @@
     });
 
 /*
+//  https://www.google.com/search?
+    newwindow=1
+    &rlz=1C1AWFA_enGR842GR842
+    &ei=DFBeXfWcE6CGk74Pg8KVmAo
+    &q=i+am+very+huppy
+    &oq=i+am+very+huppy
+    &uact=5
+/*
+
+/*
     self.addEventListener("fetch", function(e){
         e.respondWith(
             caches.match(e.request).then(function(results){
