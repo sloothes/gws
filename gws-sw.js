@@ -28,7 +28,12 @@
                         cache.put(e.request, cloneResponse);
                     });
 
-                    return response;
+                    return response.json()
+                    .then(function(data){
+                        console.log(data);
+                        return data;
+                    });
+
                 });
 
             }).catch(function(){
@@ -39,7 +44,7 @@
 
     self.addEventListener("install", function(e){
 
-        event.waitUntil(
+        e.waitUntil(
             caches.open("google").then(function(cache){
                 return cache.addAll([
                     "https://www.google.com/search?q=roll+a+die",
