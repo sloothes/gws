@@ -69,31 +69,20 @@
         debugMode && console.log(`subscribed successfully to "${name}" channel:`, object);
     });
 
+
+    var viewer = $("iframe#viewer").get(0);
+    var searchField = $("#google-search-field").get(0);
+
     $("#google-search-button").on("click", function(){
 
-        var searchField = $("#google-search-field").get(0);
         if (!searchField.value) throw "Type something and try again.";
 
-        var viewer = $("iframe#viewer").get(0);
         socket.emit("ask google", {query:searchField.value}, function(err, data){
 
-            debugMode && console.log( $(data) );
+            resutls = data;
+            debugMode && console.log( $(resutls) );
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     });
 
