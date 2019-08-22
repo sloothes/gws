@@ -69,7 +69,6 @@
         e.waitUntil(
             caches.open("google").then(function(cache){
                 return cache.addAll([
-                    "https://www.google.com/search?q=roll+a+die",
 
                  //  include resources 
                  //  for the new version...
