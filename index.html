@@ -80,11 +80,15 @@
         if (!searchField.value) throw "Type something and try again.";
 
         socket.emit("ask google", {query:searchField.value}, function(err, data){
-
-            resutls = data;
-            viewer.srcdoc = data;
-            $(viewer.contentDocument).on("load", function(){
-                contentDocument = this;
+            new Promise(function(resolve, reject){
+                viewer.srcdoc = data;
+            }).then(function(){
+                return $(viewer.contentDocument).find("#main")
+                .find(".ZINbbc.xpd.O9g5cc.uUPGi").toArray();
+            }).then(function(results){
+                results.forEach(function(result){
+                    debugMode && console.log( $(result).text();
+                });
             });
 
         });
