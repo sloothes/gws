@@ -70,6 +70,8 @@
     });
 
 
+    var results;
+    var contentDocument;
     var viewer = $("iframe#viewer").get(0);
     var searchField = $("#google-search-field").get(0);
 
@@ -80,7 +82,8 @@
         socket.emit("ask google", {query:searchField.value}, function(err, data){
 
             resutls = data;
-            debugMode && console.log( $(resutls) );
+            viewer.srcdoc = data;
+            contentDocument = viewer.contentDocument;
 
         });
 
