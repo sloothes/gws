@@ -81,7 +81,7 @@
 
         socket.emit("ask google", {query:searchField.value}, function(err, data){
             new Promise(function(resolve, reject){
-                viewer.srcdoc = data;
+                resolve( viewer.srcdoc = data );
             }).then(function(){
                 return $(viewer.contentDocument).find("#main")
                 .find(".ZINbbc.xpd.O9g5cc.uUPGi").toArray();
@@ -90,7 +90,6 @@
                     debugMode && console.log( $(result).text() );
                 });
             });
-
         });
 
     });
