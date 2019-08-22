@@ -83,7 +83,9 @@
 
             resutls = data;
             viewer.srcdoc = data;
-            contentDocument = viewer.contentDocument;
+            $(viewer.contentDocument).on("load", function(){
+                contentDocument = this;
+            });
 
         });
 
