@@ -1,61 +1,117 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
 
-    var debugMode = true;
-    var serviceWorker = navigator.serviceWorker;
+<head>
 
-    if ( serviceWorker ) {
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="description" contents="Real-time Multiplayer 3D Social Web Spaces Network">
 
-        serviceWorkerRegistration( serviceWorker, {
-            opt: {scope: "/gws/"},
-            url: "/gws/gws-sw.js",
-        });
+    <title>(home v3.5)</title>
 
-    }
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootbox-dialoges.css">
 
-    function serviceWorkerRegistration( serviceWorker, options ){
+    <script src="/socketcluster.js"></script>
+    <script src="/sc-codec-min-bin.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/bootbox.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
-        if (!serviceWorker) {
-            console.warn("Oh no! "
-                + "Your browser doesn't support "
-                + "a feature needed to run this app "
-                + "(navigator.serviceWorker).\n" 
-                + "Try using a different browser.");
-            return;
+    <script>
+
+        var debugMode = true;
+        var serviceWorker = navigator.serviceWorker;
+
+        if ( serviceWorker ) {
+
+            serviceWorkerRegistration( serviceWorker, {
+                opt: {scope: "/gws/"},
+                url: "/gws/gws-sw.js",
+            });
+
         }
 
-        serviceWorker.register(options.url, options.opt).then(function (reg) {
+        function serviceWorkerRegistration( serviceWorker, options ){
 
-            reg.addEventListener("statechange", function(){
-                debugMode && console.log({"reg active state": reg.active.state});
-            });
+            if (!serviceWorker) {
+                console.warn("Oh no! "
+                    + "Your browser doesn't support "
+                    + "a feature needed to run this app "
+                    + "(navigator.serviceWorker).\n" 
+                    + "Try using a different browser.");
+                return;
+            }
 
-            reg.addEventListener("updatefound", function(){
-                var newSWController = reg.installing;
-                debugMode && console.log("new service worker update found:");
-                newSWController.addEventListener("statechange", function(){
-                    debugMode && console.log({"new sw controller state": this.state});
-                    if ( this.state === "activated") { 
-                        // do something //
-                    }
+            serviceWorker.register(options.url, options.opt).then(function (reg) {
+
+                reg.addEventListener("statechange", function(){
+                    debugMode && console.log({"reg active state": reg.active.state});
                 });
+
+                reg.addEventListener("updatefound", function(){
+                    var newSWController = reg.installing;
+                    debugMode && console.log("new service worker update found:");
+                    newSWController.addEventListener("statechange", function(){
+                        debugMode && console.log({"new sw controller state": this.state});
+                        if ( this.state === "activated") { /* do something */ }
+                    });
+                });
+
+        /*
+            //  Refresh to activate the worker.
+                if (!reg.active) {
+                    location.reload(); return;
+                } 
+        */
+
+            }).catch(function(err) { 
+                console.error(err);
             });
+        }
 
-    /*
-        //  Refresh to activate the worker.
-            if (!reg.active) {
-                location.reload(); return;
-            } 
-    */
+    </script>
 
-        }).catch(function(err) { 
-            console.error(err);
-        });
-    }
+</head>
 
+<body>
 
+<section class="mbr-section" id="body-section">
 
+    <iframe id="viewer" src="//:0"></iframe>
 
+</section>
 
+<script>
 
+//  Socketcluster.
+
+    var socket = socketCluster.create({
+        hostname: "anywhere3d.com",
+        codecEngine: scCodecMinBin,
+    });
+
+    socket.on("connect", function(status){
+        debugMode && console.log({"status": status});
+    });
+
+    socket.on("error", function (err) {
+        console.error( err.stack );
+    });
+
+    socket.on("authStateChange", function( state ){
+        debugMode && console.log({"authStateChange": state});
+    });
+
+    socket.on("subscribe", function( name, object ){
+        debugMode && console.log(`subscribed successfully to "${name}" channel:`, object);
+    });
 
 </script>
+
+</body>
+</html>
+
