@@ -80,8 +80,8 @@
 <section class="mbr-section" id="body-section" style="width:100vw;height:100vh;overflow:hidden;">
 
     <div class="input-group" style="margin-top:0px;">
-        <div id="google-search-button" role="button" class="input-group-addon btn btn-primary">Ask Google</div>
         <input type="text" id="google-search-field" class="form-control" placeholder="Type something here and ask Google:" aria-describedby="google-search" value="">
+        <div id="google-search-button" role="button" class="input-group-addon btn btn-primary">Ask Google</div>
     </div>
 
     <div id="viewer-container" style="position:absolute;top:35px;left:0;right:0;bottom:0;margin:0;">
@@ -120,6 +120,7 @@
         var searchField = $("#google-search-field").get(0);
         if (!searchField.value) throw "Type something and try again.";
 
+        var viewer = $("iframe#viewer").get(0);
         socket.emit("ask google", {query:searchField.value}, function(err, data){
 
 
