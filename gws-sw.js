@@ -6,7 +6,29 @@
     self.importScripts(
         "/js/Objectid.js",
         "/js/zangodb.min.js",
+        "/socketcluster.js",
+        "/sc-codec-min-bin.js",
     );
+
+//  IMPORTANT: service worker socket "authState" always is
+//  "unauthenticated" as dont have access to localStorage.
+
+    var socket = socketCluster.create({
+        hostname: "anywhere3d.com",
+        codecEngine: scCodecMinBin,
+    });
+
+    socket.on("connect", function(status){
+        debugMode && console.log("[service-worker]:", {"status": status});
+    });
+
+    socket.on("error", function (err) {
+        console.error( "[service-worker]:", err );
+    });
+
+    socket.on("authStateChange", function( state ){
+        debugMode && console.log("[service-worker]:", {"authStateChange": state});
+    });
 
 
 
@@ -20,24 +42,24 @@
     self.addEventListener("fetch", function(e){
         e.respondWith(
             caches.match(e.request).then(function(results){
-
                 return results || fetch(e.request)
                 .then(function(response){
-                    var cloneResponse = response.clone();
+
                     caches.open("google").then(function(cache){
-                        cache.put(e.request, cloneResponse);
+                        cache.put( e.request, response.clone() );
                     });
 
-                    return response.json()
-                    .then(function(data){
-                        console.log(data);
+                    return response.json().then(function(data){
+                        debugMode && console.log(data);
                         return data;
                     });
 
                 });
 
             }).catch(function(){
-                return caches.match("https://www.google.com/search?q=roll+a+die");
+                return new Response("Sorry! an error occurred.", {
+                    "Content-Type": "text/json",
+                });
             })
         );
     });
