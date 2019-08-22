@@ -30,15 +30,7 @@
         debugMode && console.log("[service-worker]:", {"authStateChange": state});
     });
 
-
-
-
-
-
-
-
-
-
+/*
     self.addEventListener("fetch", function(e){
         e.respondWith(
             caches.match(e.request).then(function(results){
@@ -49,7 +41,7 @@
                         cache.put( e.request, response.clone() );
                     });
 
-                    return response.json().then(function(data){
+                    return response.text().then(function(data){
                         debugMode && console.log(data);
                         return data;
                     });
@@ -58,11 +50,12 @@
 
             }).catch(function(){
                 return new Response("Sorry! an error occurred.", {
-                    "Content-Type": "text/json",
+                    "Content-Type": "text/html",
                 });
             })
         );
     });
+*/
 
     self.addEventListener("install", function(e){
 
