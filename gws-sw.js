@@ -17,8 +17,39 @@
 
 
 
+    self.addEventListener("fetch", function(e){
+        e.respondWith(
+            caches.match(e.request).then(function(results){
+
+                return results || fetch(e.request)
+                .then(function(response){
+                    var cloneResponse = response.clone();
+                    caches.open("google").then(function(cache){
+                        cache.put(e.request, cloneResponse);
+                    });
+
+                    return response;
+                });
+
+            }).catch(function(){
+                return caches.match("https://www.google.com/search?q=roll+a+die");
+            })
+        );
+    });
 
     self.addEventListener("install", function(e){
+
+        event.waitUntil(
+            caches.open("google").then(function(cache){
+                return cache.addAll([
+                    "https://www.google.com/search?q=roll+a+die",
+
+                 //  include resources 
+                 //  for the new version...
+
+                ]);
+            })
+        );
 
         self.skipWaiting();
 
