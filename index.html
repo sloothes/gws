@@ -115,6 +115,37 @@
         debugMode && console.log(`subscribed successfully to "${name}" channel:`, object);
     });
 
+    $("#google-search-button").on("click", function(){
+
+        var searchField = $("#google-search-field").get(0);
+        if (!searchField.value) throw "Type something and try again.";
+
+        socket.emit("ask google", {query:searchField.value}, function(err, data){
+
+
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+
 </script>
 
 </body>
