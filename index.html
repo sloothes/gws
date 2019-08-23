@@ -36,6 +36,11 @@
         visibility: visible !important;
     }
 
+    .gsc-resultsbox-visible {
+        display: none !important;
+    }
+
+
 </style>
 
 <section class="mbr-section" id="body-section" style="width:100vw;height:100vh;overflow:auto;">
@@ -94,6 +99,18 @@
 (function(){
 
     const viewer = document.getElementById("viewer");
+
+    $("button.gsc-search-button.gsc-search-button-v2").on("click", function(){
+    //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
+
+        $(".gsc-resultsbox-visible")
+        .find(".gsc-expansionArea")
+        .find(".gs-webResult gs-result")
+        .toArray().forEach(function(result){
+            debugMode && console.log(result);
+        });
+
+    });
 
 });
 </script>
