@@ -84,17 +84,16 @@
                 return $(viewer.contentDocument).find("#main")
                 .find(".ZINbbc.xpd.O9g5cc.uUPGi").toArray();
             }).then(function(results){
-                //viewer.srcdoc = $(results).html();
+                debugMode && console.log(results);
                 results.forEach(function(result){
-                    debugMode && console.log( $(result).html() );
+                    debugMode && console.log( $(result).html() ); //  $(result).html()
                 });
-                return results;
-            }).then(function(results){
-            //  viewer.srcdoc = results;
+                return $(results).html();
+            }).then(function(html){
+            //  viewer.srcdoc = html;
                 viewer.contentDocument.open();
-                viewer.contentDocument.write( $(results).html() );
+                viewer.contentDocument.write(html);
                 viewer.contentDocument.close();
-
             });
         });
 
