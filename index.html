@@ -92,7 +92,7 @@
             }).then(function(results){
             //  viewer.srcdoc = results;
                 viewer.contentDocument.open();
-                viewer.contentDocument.write( results.html() );
+                viewer.contentDocument.write( $(results).html() );
                 viewer.contentDocument.close();
 
             });
