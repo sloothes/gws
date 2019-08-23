@@ -57,7 +57,7 @@
             const cx = "013151438370468652337:0mozxitt4ka";
             const src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
             loadjs( src, {async: true}, function(){
-
+                debugMode && console.log( $("button.gsc-search-button.gsc-search-button-v2") );
                 $("button.gsc-search-button.gsc-search-button-v2").on("click", function(){
                 //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
 
