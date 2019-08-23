@@ -84,7 +84,7 @@
                 return $(viewer.contentDocument).find("#main")
                 .find(".ZINbbc.xpd.O9g5cc.uUPGi").toArray();
             }).then(function(results){
-                viewer.srcdoc = results;
+                viewer.srcdoc = $(results).html();
                 results.forEach(function(result){
                     debugMode && console.log( $(result).html() );
                 });
