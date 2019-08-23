@@ -41,7 +41,7 @@
 <section class="mbr-section" id="body-section" style="width:100vw;height:100vh;overflow:auto;">
 
     <div id="viewer-container" style="position:absolute;top:65px;left:0;right:0;bottom:0;margin:0;">
-        <iframe id="viewer" style="width:100%;height:100%;overflow:hidden;border:none;"></iframe>
+        <iframe id="viewer" src="/demo/crowd" style="width:100%;height:100%;overflow:hidden;border:none;"></iframe>
     </div>
 
     <div class="input-group" style="width:100%;margin-top:0px;">
@@ -96,12 +96,12 @@
     const viewer = document.getElementById("viewer");
 
 /*
-    var count = 10; // max = 10!
-    var cx = "013151438370468652337:0mozxitt4ka"; // important!
-    var API_KEY = "AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0"; // important!
-    var cse_token = "AKaTTZjyjPDMFcBzYCHkF-JA6ZCp:1566577340775"; // important!
-    var searchTerms = "google search pegmen";
-    var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/\s/g, "+")}&num=${count}&cx=${cx}&key${API_KEY}`;
+    count = 10; // max = 10!
+    cx = "013151438370468652337:0mozxitt4ka"; // important!
+    API_KEY = "AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0"; // important!
+    cse_token = "AKaTTZjyjPDMFcBzYCHkF-JA6ZCp:1566577340775"; // important!
+    searchTerms = "google search pegmen";
+    searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/\s/g, "+")}&num=${count}&cx=${cx}&key${API_KEY}`;
     fetch(searchURL).then(function(response){
         return response.json();
     }).then(function(json){
