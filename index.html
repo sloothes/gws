@@ -62,7 +62,7 @@
     var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms}&num=${count}&cx=${cx}`;
 
     fetch(searchURL).then(function(response){
-        return (response.json());
+        return response.json();
     }).then(function(json){
         console.log(json);
     });
