@@ -79,7 +79,7 @@
 
         socket.emit("ask google", {query:searchField.value}, function(err, data){
             new Promise(function(resolve, reject){
-                resolve( viewer.srcdoc = data.replace(/sloothes/g, "google" );
+                resolve( viewer.srcdoc = data.replace(/sloothes/g, "google") );
             }).then(function(){
                 return $(viewer.contentDocument).find("#main")
                 .find(".ZINbbc.xpd.O9g5cc.uUPGi").toArray();
