@@ -78,6 +78,7 @@
         if (!searchField.value) throw "Type something and try again.";
 
         socket.emit("ask google", {query:searchField.value}, function(err, data){
+
             if (err) {
                 viewer.srcdoc = err;
                 return;
