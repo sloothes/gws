@@ -39,7 +39,7 @@
     </div>
 
     <div class="input-group" style="width:100%;margin-top:0px;">
-        <script async src="https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script>
+        <script async src="https://cse.google.com/cse.js?key=AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0&cx=013151438370468652337:0mozxitt4ka"></script>
         <div class="gcse-searchresults-only"></div>
     </div>
 
@@ -52,14 +52,16 @@
 /*
     var count = 100;
     var cx = "013151438370468652337:0mozxitt4ka"; // important!
+    var apiKEY = "AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0"; // important!
     var searchTerms = "google search pegmen";
-    var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms}&num=${count}&cx=${cx}`;
+    var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/ /g, "+")}&num=${count}&cx=${cx}&key${apiKEY}`;
     fetch(searchURL).then(function(response){
         return response.json();
     }).then(function(json){
         console.log(json);
+        if (json.error) throw json.error;
     }).catch(function(err){
-        console.error(err);
+        console.error(err.code, err.errors[0].message);
     });
 */
 
@@ -71,7 +73,7 @@
 
 <!--
 //  GET https://www.googleapis.com/customsearch/v1 TEMPLATE.
-    "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json&key=INSERT_YOUR_API_KEY"
 -->
 
 
