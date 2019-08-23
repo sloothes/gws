@@ -101,7 +101,7 @@
     var API_KEY = "AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0"; // important!
     var cse_token = "AKaTTZjyjPDMFcBzYCHkF-JA6ZCp:1566577340775"; // important!
     var searchTerms = "google search pegmen";
-    var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/ /g, "+")}&num=${count}&cx=${cx}&key${API_KEY}`;
+    var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/\s/g, "+")}&num=${count}&cx=${cx}&key${API_KEY}`;
     fetch(searchURL).then(function(response){
         return response.json();
     }).then(function(json){
