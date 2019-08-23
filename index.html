@@ -14,56 +14,54 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
 
-    <script src="/socketcluster.js"></script>
-    <script src="/sc-codec-min-bin.js"></script>
+    <script>var debugMode = true;</script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/bootbox.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
-    <script>
-
-        var debugMode = true;
-
-    </script>
-
 </head>
 
 <body style="overflow:hidden;">
 
+<style>
+
+
+
+
+</style>
+
 <section class="mbr-section" id="body-section" style="width:100vw;height:100vh;overflow:hidden;">
+
+    <div id="viewer-container" style="position:absolute;top:65px;left:0;right:0;bottom:0;margin:0;">
+        <iframe id="viewer" style="width:100%;height:100%;overflow:hidden;border:none;"></iframe>
+    </div>
 
     <div class="input-group" style="width:100%;margin-top:0px;">
         <script async src="https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script>
         <div class="gcse-search"></div>
     </div>
 
-    <div id="viewer-container" style="position:absolute;top:35px;left:0;right:0;bottom:0;margin:0;">
-        <iframe id="viewer" style="width:100%;height:100%;overflow:hidden;border:none;"></iframe>
-    </div>
-
 </section>
 
 <script>
+(function(){
+
+    const viewer = document.getElementById("viewer");
 
 
 
-
+});
 </script>
 
 </body>
 </html>
 
 <!--
-    <div class="input-group" style="display:none;margin-top:0px;">
-        <input type="text" id="google-search-field" class="form-control" placeholder="Type something here and ask Google:" aria-describedby="google-search" value="">
-        <div id="google-search-button" role="button" class="input-group-addon btn btn-primary">Ask Google</div>
-    </div>
--->
 
 <script>
 /*
-
+(function(){
 //  Socketcluster.
 
     var socket = socketCluster.create({
@@ -86,7 +84,7 @@
     socket.on("subscribe", function( name, object ){
         debugMode && console.log(`subscribed successfully to "${name}" channel:`, object);
     });
-
+})();
 */
 /*
 (function(){
@@ -127,45 +125,55 @@
 })();
 */
 /*
-    //  sw.js
-        var serviceWorker = navigator.serviceWorker;
-        if ( serviceWorker ) {
-            serviceWorkerRegistration( serviceWorker, {
-                opt: {scope: "/gws/"},
-                url: "/gws/gws-sw.js",
-            });
-        }
+(function(){
+//  sw.js
+    var serviceWorker = navigator.serviceWorker;
+    if ( serviceWorker ) {
+        serviceWorkerRegistration( serviceWorker, {
+            opt: {scope: "/gws/"},
+            url: "/gws/gws-sw.js",
+        });
+    }
 
-        function serviceWorkerRegistration( serviceWorker, options ){
-            if (!serviceWorker) {
-                console.warn("Oh no! "
-                    + "Your browser doesn't support "
-                    + "a feature needed to run this app "
-                    + "(navigator.serviceWorker).\n" 
-                    + "Try using a different browser.");
-                return;
-            }
-            serviceWorker.register(options.url, options.opt).then(function (reg) {
-                reg.addEventListener("statechange", function(){
-                    debugMode && console.log({"reg active state": reg.active.state});
+    function serviceWorkerRegistration( serviceWorker, options ){
+        if (!serviceWorker) {
+            console.warn("Oh no! "
+                         + "Your browser doesn't support "
+                         + "a feature needed to run this app "
+                         + "(navigator.serviceWorker).\n" 
+                         + "Try using a different browser.");
+            return;
+        }
+        serviceWorker.register(options.url, options.opt).then(function (reg) {
+            reg.addEventListener("statechange", function(){
+                debugMode && console.log({"reg active state": reg.active.state});
+            });
+            reg.addEventListener("updatefound", function(){
+                var newSWController = reg.installing;
+                debugMode && console.log("new service worker update found:");
+                newSWController.addEventListener("statechange", function(){
+                    debugMode && console.log({"new sw controller state": this.state});
+                    if ( this.state === "activated") { 
+                        //  do something
+                    }
                 });
-                reg.addEventListener("updatefound", function(){
-                    var newSWController = reg.installing;
-                    debugMode && console.log("new service worker update found:");
-                    newSWController.addEventListener("statechange", function(){
-                        debugMode && console.log({"new sw controller state": this.state});
-                        if ( this.state === "activated") { 
-                            //  do something
-                        }
-                    });
-                });
+            });
             //  Refresh to activate the worker.
             //  if (!reg.active) {
             //      location.reload(); return;
             //  } 
-            }).catch(function(err) { 
-                console.error(err);
-            });
-        }
+        }).catch(function(err) { 
+            console.error(err);
+        });
+    }
+})();
 */
 </script>
+
+    <div class="input-group" style="display:none;margin-top:0px;">
+        <input type="text" id="google-search-field" class="form-control" placeholder="Type something here and ask Google:" aria-describedby="google-search" value="">
+        <div id="google-search-button" role="button" class="input-group-addon btn btn-primary">Ask Google</div>
+    </div>
+
+-->
+
