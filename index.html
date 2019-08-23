@@ -56,8 +56,6 @@
 
     var count = 100;
     var cx = "013151438370468652337:0mozxitt4ka"; // important!
-
-
     var searchTerms = "google search pegmen";
     var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms}&num=${count}&cx=${cx}`;
 
@@ -65,6 +63,8 @@
         return response.json();
     }).then(function(json){
         console.log(json);
+    }).catch(function(err){
+        console.error(err);
     });
 
 });
