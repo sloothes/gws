@@ -27,6 +27,14 @@
 
 <style>
 
+    .gsc-search-box,
+    .gsc-search-box-tools {
+        display: unset !important!;
+    }
+
+    .gsc-control-wrapper-cse {
+        visibility: visible !important;
+    }
 
 
 
@@ -88,9 +96,6 @@
 (function(){
 
     const viewer = document.getElementById("viewer");
-
-    $(".gsc-control-wrapper-cse").get(0).style.visibility = "visible !important";
-    $("form.gsc-search-box.gsc-search-box-tools").get(0).style.display = "unset !important";
 
 /*
     var count = 10; // max = 10!
