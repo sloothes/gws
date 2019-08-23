@@ -39,7 +39,7 @@
     </div>
 
     <div class="input-group" style="width:100%;margin-top:0px;">
-        <script async src="https://cse.google.com/cse.js?key=AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0&cx=013151438370468652337:0mozxitt4ka"></script>
+        <script id="custom-search" async src="https://cse.google.com/cse.js?key=AKaTTZjyjPDMFcBzYCHkF-JA6ZCp:1566577340775&cx=013151438370468652337:0mozxitt4ka"></script>
         <div class="gcse-searchresults-only"></div>
     </div>
 
@@ -90,12 +90,13 @@
     const viewer = document.getElementById("viewer");
 
     $(".gsc-control-wrapper-cse").get(0).style.visibility = "visible !important";
-    $("form.gsc-search-box gsc-search-box-tools").get(0).style.display = "unset !important";
+    $("form.gsc-search-box.gsc-search-box-tools").get(0).style.display = "unset !important";
 
 /*
     var count = 10; // max = 10!
     var cx = "013151438370468652337:0mozxitt4ka"; // important!
     var API_KEY = "AIzaSyDSnACpVP-w42vYu4Z7BviRrUiPVsDZPl0"; // important!
+    var cse_token = "AKaTTZjyjPDMFcBzYCHkF-JA6ZCp:1566577340775"; // important!
     var searchTerms = "google search pegmen";
     var searchURL = `https://www.googleapis.com/customsearch/v1?q=${searchTerms.replace(/ /g, "+")}&num=${count}&cx=${cx}&key${API_KEY}`;
     fetch(searchURL).then(function(response){
