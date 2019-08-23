@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
 
     <script>var debugMode = true;</script>
+    <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/bootbox.min.js"></script>
@@ -50,7 +51,34 @@
     </div>
 
     <div class="input-group" style="width:100%;margin-top:0px;">
-        <script async src="https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script>
+        <!-- script async src="https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka"></script -->
+        <script>
+        (function(){
+            var src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
+            loadjs( src, {async: true}, function(){
+
+                $("button.gsc-search-button.gsc-search-button-v2").on("click", function(){
+                //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
+
+                    $(".gsc-resultsbox-visible")
+                    .find(".gsc-expansionArea")
+                    .find(".gs-webResult gs-result")
+                    .toArray().forEach(function(result){
+                        debugMode && console.log(result);
+                    });
+
+                });
+
+
+
+
+
+
+
+
+            });
+        })();
+        </script>
         <div class="gcse-searchresults-only"></div>
     </div>
 
@@ -100,17 +128,6 @@
 
     const viewer = document.getElementById("viewer");
 
-    $("button.gsc-search-button.gsc-search-button-v2").on("click", function(){
-    //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
-
-        $(".gsc-resultsbox-visible")
-        .find(".gsc-expansionArea")
-        .find(".gs-webResult gs-result")
-        .toArray().forEach(function(result){
-            debugMode && console.log(result);
-        });
-
-    });
 
 });
 </script>
