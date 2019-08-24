@@ -100,7 +100,8 @@
                 }
             };
 
-        //  client.postMessage("SW Says:", msg, [channel.port2]);
+            client.postMessage(msg, [channel.port2]);
+
         });
     }
 

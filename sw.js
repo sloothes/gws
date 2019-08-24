@@ -8,7 +8,7 @@
             url: "/gws/gws-sw.js",
         });
 
-        navigator.serviceWorker.addEventListener('message', function(e){
+        navigator.serviceWorker.addEventListener("message", function(e){
             console.log("Client Received Message:", e.data);
         });
 
