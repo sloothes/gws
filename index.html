@@ -72,6 +72,7 @@
 <script>
 document.body.onload = function(){
 
+    var n = 0;
     const cx = "013151438370468652337:0mozxitt4ka";
     const src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
     debugMode && console.log( $("button.gsc-search-button.gsc-search-button-v2").get(0) );
@@ -99,7 +100,9 @@ document.body.onload = function(){
                 var contentWindow = viewer.contentWindow;
                 var pegmen = contentWindow.pegmen;
 
-                scene.remove.apply(scene, pegmen);  //  important!
+                if (n == 0) scene.remove.apply(scene, pegmen);  //  important!
+
+                n++;
 
                 var results;
                 setTimeout(function(){
@@ -120,44 +123,6 @@ document.body.onload = function(){
 
 }
 </script>
-
-<!--
-//  GET https://www.googleapis.com/customsearch/v1 TEMPLATE.
-    "template" = {"https://www.googleapis.com/customsearch/v1?
-        q={searchTerms}
-        &num={count?}
-        &start={startIndex?}
-        &lr={language?}
-        &safe={safe?}
-        &cx={cx?}
-        &sort={sort?}
-        &filter={filter?}
-        &gl={gl?}
-        &cr={cr?}
-        &googlehost={googleHost?}
-        &c2coff={disableCnTwTranslation?}
-        &hq={hq?}
-        &hl={hl?}
-        &siteSearch={siteSearch?}
-        &siteSearchFilter={siteSearchFilter?}
-        &exactTerms={exactTerms?}
-        &excludeTerms={excludeTerms?}
-        &linkSite={linkSite?}
-        &orTerms={orTerms?}
-        &relatedSite={relatedSite?}
-        &dateRestrict={dateRestrict?}
-        &lowRange={lowRange?}
-        &highRange={highRange?}
-        &searchType={searchType}
-        &fileType={fileType?}
-        &rights={rights?}
-        &imgSize={imgSize?}
-        &imgType={imgType?}
-        &imgColorType={imgColorType?}
-        &imgDominantColor={imgDominantColor?}
-        &alt=json&key=INSERT_YOUR_API_KEY" // important!
-    };
--->
 
 </body>
 </html>
