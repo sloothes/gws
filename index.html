@@ -41,10 +41,14 @@
         visibility: visible !important;
     }
 
+    .gsc-adBlock,
+    .gsc-webResult.gsc-result {
+        display: none !important;
+    }
+
     .gsc-resultsbox-visible {
         display: block !important;
     }
-
 
 </style>
 
@@ -79,7 +83,6 @@ document.body.onload = function(){
             .toArray().forEach(function(result){
             debugMode && console.log(result);
         });
-
     });
 
 }
