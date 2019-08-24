@@ -12,9 +12,11 @@
 */
 
     self.addEventListener("fetch", function(e){
-        debugMode && console.log( e.request );
+    //  debugMode && console.log( e.request );
 
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
+            debugMode && console.log( e.request );
+
             e.respondWith( caches.match(e.request).then(function(results){
                 return results || fetch(e.request).then(function(response){
 
