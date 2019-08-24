@@ -38,6 +38,9 @@
                             debugMode && console.log("clone4:", reader.result);
                         };
                         reader.readAsText(blob);
+                        reader.readAsDataURL(blob);
+                        reader.readAsArrayBuffer(blob);
+                        reader.readAsBinaryString(blob);
                     }).catch(function(err){
                         console.error(err);
                     });
