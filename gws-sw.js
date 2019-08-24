@@ -1,84 +1,46 @@
 //  google webspace search sw.js
 
-    self.version = 3.5;
+    self.version = 1.0;
     var debugMode = true;
-
+/*
     self.importScripts(
         "/js/Objectid.js",
         "/js/zangodb.min.js",
         "/socketcluster.js",
         "/sc-codec-min-bin.js",
     );
-
-//  IMPORTANT: service worker socket "authState" always is
-//  "unauthenticated" as dont have access to localStorage.
-
-    var socket = socketCluster.create({
-        hostname: "anywhere3d.com",
-        codecEngine: scCodecMinBin,
-    });
-
-    socket.on("connect", function(status){
-        debugMode && console.log("[service-worker]:", {"status": status});
-    });
-
-    socket.on("error", function (err) {
-        console.error( "[service-worker]:", err );
-    });
-
-    socket.on("authStateChange", function( state ){
-        debugMode && console.log("[service-worker]:", {"authStateChange": state});
-    });
-
-/*
-//  https://www.google.com/search?
-    newwindow=1
-    &rlz=1C1AWFA_enGR842GR842
-    &ei=DFBeXfWcE6CGk74Pg8KVmAo
-    &q=i+am+very+huppy
-    &oq=i+am+very+huppy
-    &uact=5
-/*
-
-/*
-    self.addEventListener("fetch", function(e){
-        e.respondWith(
-            caches.match(e.request).then(function(results){
-                return results || fetch(e.request)
-                .then(function(response){
-
-                    caches.open("google").then(function(cache){
-                        cache.put( e.request, response.clone() );
-                    });
-
-                    return response.text().then(function(data){
-                        debugMode && console.log(data);
-                        return data;
-                    });
-
-                });
-
-            }).catch(function(){
-                return new Response("Sorry! an error occurred.", {
-                    "Content-Type": "text/html",
-                });
-            })
-        );
-    });
 */
 
+    self.addEventListener("fetch", function(e){
+        if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
+            e.respondWith(
+                caches.match(e.request).then(function(results){
+                    return results || fetch(e.request).then(function(response){
+
+                        caches.open("google").then(function(cache){
+                            cache.put( e.request, response.clone() );
+                        });
+
+                        response.clone().json().then(function(data){
+                            debugMode && console.log(data);
+                        });
+
+                        return response;
+                    });
+
+                }).catch(function(err){
+                    console.error(err);
+                    return fetch(e.request)
+                    .then(function(response){
+                        return response;
+                    });
+                })
+            );
+        }
+    });
+
+
     self.addEventListener("install", function(e){
-
-        e.waitUntil(
-            caches.open("google").then(function(cache){
-                return cache.addAll([
-
-                 //  include resources 
-                 //  for the new version...
-
-                ]);
-            })
-        );
 
         self.skipWaiting();
 
