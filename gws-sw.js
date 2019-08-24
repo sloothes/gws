@@ -22,6 +22,7 @@
                         var clone1 = response.clone();
                         var clone2 = response.clone();
                         var clone3 = response.clone();
+                        var clone4 = response.clone();
 
                         debugMode && console.log( "clone1:", clone1 );
 
@@ -29,8 +30,14 @@
                             cache.put( e.request, clone2 );
                         });
 
-                        clone3.text().then(function(data){
+                        clone3.arrayBuffer().then(function(data){
                             debugMode && console.log("clone3:", data);
+                        });
+                        
+                        clone4.blob().then(function(blob){
+                            debugMode && console.log(
+                                "clone4:", URL.createObjectURL(blob);
+                            );
                         });
 
                         return response;
