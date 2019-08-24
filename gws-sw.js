@@ -28,62 +28,17 @@
                         cache.put( e.request, clone2 );
                     });
 
-                /*
-                //  var clone3 = response.clone();
-                //  clone3.arrayBuffer().then(function(data){
-                //      debugMode && console.log(
-                //          "clone3:", data); // is not arraybuffer.
-                //  });
-                */
-
-                /*
-                    var clone4 = response.clone();
-                    clone4.blob().then(function(blob){
-                        var reader = new FileReader();
-                        reader.onload = function(){
-                            debugMode && console.log(
-                                "clone4 dataURL:", reader.result
-                            ); // is not dataURL.
-                        };
-                        reader.readAsDataURL(blob);
-                        return blob;
-                    //  reader.readAsText(blob); // is not text.
-                    //  reader.readAsArrayBuffer(blob); // is not arraybuffer.
-                    }).then(function(blob){
-                        var reader = new FileReader();
-                        reader.onload = function(){
-                            debugMode && console.log(
-                                "clone4 binaryString:", reader.result
-                            ); // is not binaryString.
-                        };
-                        reader.readAsBinaryString(blob);
-                    }).catch(function(err){
-                        console.error(err);
-                    });
-                */
-
-                //  So what is it? // is a attached json.txt file with type "application/javascript.
-
                     return response;
                 });
 
-            }).then(function(){
+            }).then(function(response){
 
                 self.clients.matchAll().then(function(clients){
                     var channel = new MessageChannel();
                     clients[0].postMessage("refresh", [channel.port2]);
-
-                /*
-                    channel.port1.addEventListener("message", function(e){
-                        if (e.data.error) {
-                            console.error(e.data.error);
-                        } else {
-                            console.log(e.data);
-                        }
-                    });
-                */
-
                 });
+
+                return response;
 
             }).catch(function(err){
                 console.error(err);
@@ -145,3 +100,51 @@
             });
         });
     }
+
+
+
+/*
+//  var clone3 = response.clone();
+//  clone3.arrayBuffer().then(function(data){
+//      debugMode && console.log(
+//          "clone3:", data); // is not arraybuffer.
+//  });
+*/
+
+/*
+    var clone4 = response.clone();
+    clone4.blob().then(function(blob){
+        var reader = new FileReader();
+        reader.onload = function(){
+            debugMode && console.log(
+                "clone4 dataURL:", reader.result
+            ); // is not dataURL.
+        };
+        reader.readAsDataURL(blob);
+        return blob;
+        //  reader.readAsText(blob); // is not text.
+        //  reader.readAsArrayBuffer(blob); // is not arraybuffer.
+    }).then(function(blob){
+        var reader = new FileReader();
+        reader.onload = function(){
+            debugMode && console.log(
+                "clone4 binaryString:", reader.result
+            ); // is not binaryString.
+        };
+        reader.readAsBinaryString(blob);
+    }).catch(function(err){
+        console.error(err);
+    });
+*/
+
+//  So what is it? // is a attached json.txt file with type "application/javascript.
+
+/*
+    channel.port1.addEventListener("message", function(e){
+        if (e.data.error) {
+            console.error(e.data.error);
+        } else {
+            console.log(e.data);
+        }
+    });
+*/
