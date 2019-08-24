@@ -28,7 +28,7 @@
                             cache.put( e.request, clone2 );
                         });
 
-                        clone3.json().then(function(data){
+                        clone3.text().then(function(data){
                             debugMode && console.log("clone3:", data);
                         });
 
