@@ -88,6 +88,32 @@
 
     });
 
+    function send_message_to_client(client, msg){
+        return new Promise(function(resolve, reject){
+            var channel = new MessageChannel();
+
+            channel.port1.onmessage = function(e){
+                if (e.data.error) {
+                    reject(e.data.error);
+                } else {
+                    resolve(e.data);
+                }
+            };
+
+            client.postMessage("SW Says:", msg, [channel.port2]);
+        });
+    }
+
+    function send_message_to_all_clients(msg){
+        clients.matchAll().then(function(clients){
+            clients.forEach(function(client){
+                send_message_to_client(client, msg).then(function(msg){
+                    console.log("SW Received Message:", msg));
+                });
+            });
+        });
+    }
+
     function unistall(){
         self.registration.unregister().then(function(){
             return self.clients.matchAll();

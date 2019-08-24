@@ -1,11 +1,19 @@
 //  sw.js
     var serviceWorker = navigator.serviceWorker;
+
     if ( serviceWorker ) {
+
         serviceWorkerRegistration( serviceWorker, {
             opt: {scope: "/gws/"},
             url: "/gws/gws-sw.js",
         });
+
+        navigator.serviceWorker.addEventListener('message', function(e){
+            console.log("Client Received Message:", e.data);
+        });
+
     }
+
     function serviceWorkerRegistration( serviceWorker, options ){
         if (!serviceWorker) {
             console.warn("Oh no! "
