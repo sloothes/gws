@@ -107,13 +107,13 @@ document.body.onload = function(){
                     .find(".gs-webResult.gs-result")
                     .toArray();
                     results.forEach(function(result){
-                        debugMode && console.log(result);
+                        debugMode && console.log(result.innerHTML);
                     });
                 }, 0);
 
                 setTimeout(function(){
                     results.forEach(function(result){
-                        contentWindow.createResultPegman( result )
+                        contentWindow.createResultPegman( result.innerHTML )
                     });
                 }, 0);
 
