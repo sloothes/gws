@@ -113,7 +113,7 @@ document.body.onload = function(){
 
                 setTimeout(function(){
                     results.forEach(function(result){
-                        contentWindow.createResultPegman( result.innerHTML )
+                        contentWindow.createResultPegman( result );
                     });
                 }, 0);
 
