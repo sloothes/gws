@@ -111,7 +111,11 @@ document.body.onload = function(){
                     });
                 }, 0);
 
-
+                setTimeout(function(){
+                    results.forEach(function(result){
+                        contentWindow.createResultPegman( result )
+                    });
+                }, 0);
 
 
 
