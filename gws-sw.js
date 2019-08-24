@@ -13,6 +13,7 @@
 
     self.addEventListener("fetch", function(e){
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
+            e.request.url = e.request.url.replace("&num=10", "&num=100");
             debugMode && console.log( e.request );
             e.respondWith(
                 caches.match(e.request).then(function(results){
