@@ -18,24 +18,29 @@
                 return results || fetch(e.request).then(function(response){
 
                     var clone1 = response.clone();
-                    var clone2 = response.clone();
-                    var clone3 = response.clone();
-                    var clone4 = response.clone();
-
                     debugMode && console.log( "clone1:", clone1 );
 
+                    var clone2 = response.clone();
                     caches.open("google").then(function(cache){
                         cache.put( e.request, clone2 );
                     });
 
+                /*
+                //  var clone3 = response.clone();
                 //  clone3.arrayBuffer().then(function(data){
-                //      debugMode && console.log("clone3:", data); // is not arraybuffer.
+                //      debugMode && console.log(
+                //          "clone3:", data); // is not arraybuffer.
                 //  });
+                */
 
+                /*
+                    var clone4 = response.clone();
                     clone4.blob().then(function(blob){
                         var reader = new FileReader();
                         reader.onload = function(){
-                            debugMode && console.log("clone4 dataURL:", reader.result);
+                            debugMode && console.log(
+                                "clone4 dataURL:", reader.result
+                            ); // is not dataURL.
                         };
                         reader.readAsDataURL(blob);
                         return blob;
@@ -44,12 +49,17 @@
                     }).then(function(blob){
                         var reader = new FileReader();
                         reader.onload = function(){
-                            debugMode && console.log("clone4 binaryString:", reader.result);
+                            debugMode && console.log(
+                                "clone4 binaryString:", reader.result
+                            ); // is not binaryString.
                         };
                         reader.readAsBinaryString(blob);
                     }).catch(function(err){
                         console.error(err);
                     });
+                */
+
+                //  So what is it?
 
                     return response;
                 });
