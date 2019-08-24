@@ -13,7 +13,7 @@
 
     self.addEventListener("fetch", function(e){
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
-            console.log( e.request );
+            debugMode && console.log( e.request );
             e.respondWith(
                 caches.match(e.request).then(function(results){
                     return results || fetch(e.request).then(function(response){
@@ -22,7 +22,7 @@
                         var clone2 = response.clone();
                         var clone3 = response.clone();
 
-                        console.log( "clone1:", clone1 );
+                        debugMode && console.log( "clone1:", clone1 );
 
                         caches.open("google").then(function(cache){
                             cache.put( e.request, clone2 );
