@@ -13,7 +13,6 @@
 
     self.addEventListener("fetch", function(e){
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
-            e.request.url = e.request.url.replace("&num=10", "&num=100");
             debugMode && console.log( e.request );
             e.respondWith(
                 caches.match(e.request).then(function(results){
@@ -35,11 +34,6 @@
                         });
 
                         clone4.blob().then(function(blob){
-                            console.log( URL.createObjectURL(blob) );
-                            return blob;
-                        }).catch(function(err){
-                            console.error(err);
-                        }).then(function(blob){
                             var reader = new FileReader();
                             reader.onload = function(){
                                 debugMode && console.log("clone4:", reader.result);
