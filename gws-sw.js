@@ -17,6 +17,8 @@
                 caches.match(e.request).then(function(results){
                     return results || fetch(e.request).then(function(response){
 
+                        console.log(response);
+
                         caches.open("google").then(function(cache){
                             cache.put( e.request, response.clone() );
                         });
