@@ -17,11 +17,6 @@
 
     <script>
         var debugMode = true;
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.addEventListener("message", function(e){
-                console.log("Client Received Message:", e.data);
-            });
-        }
     </script>
 
     <script src="/gws/sw.js"></script>
@@ -92,6 +87,33 @@ document.body.onload = function(){
             debugMode && console.log(result);
         });
     });
+
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.addEventListener("message", function(e){
+            console.log("Client Received Message:", e.data);
+
+            if ( e.data === "refresh" ){
+
+                var contentWindow = viewer.contentWindow;
+                var scene = viewer.contentWindow.scene;
+                scene.remove.apply(scene, pegmen);  //  important!
+
+                var results = $(".gsc-resultsbox-visible")
+                .find(".gsc-expansionArea")
+                .find(".gs-webResult.gs-result")
+                .toArray();
+
+                results.forEach(function(result){
+                    debugMode && console.log(result);
+                });
+
+
+
+
+            }
+
+        });
+    }
 
 }
 </script>
