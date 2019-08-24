@@ -33,11 +33,20 @@
                         clone3.arrayBuffer().then(function(data){
                             debugMode && console.log("clone3:", data);
                         });
-                        
+
                         clone4.blob().then(function(blob){
-                            debugMode && console.log(
-                                "clone4:", URL.createObjectURL(blob);
-                            );
+                            console.log( URL.createObjectURL(blob) );
+                            return blob;
+                        }).catch(function(err){
+                            console.error(err);
+                        }).then(function(blob){
+                            var reader = new FileReader();
+                            reader.onload = function(){
+                                debugMode && console.log("clone4:", reader.result);
+                            };
+                            reader.readAsText(blob);
+                        }).catch(function(err){
+                            console.error(err);
                         });
 
                         return response;
