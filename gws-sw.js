@@ -14,46 +14,44 @@
     self.addEventListener("fetch", function(e){
         if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
             debugMode && console.log( e.request );
-            e.respondWith(
-                caches.match(e.request).then(function(results){
-                    return results || fetch(e.request).then(function(response){
+            e.respondWith( caches.match(e.request).then(function(results){
+                return results || fetch(e.request).then(function(response){
 
-                        var clone1 = response.clone();
-                        var clone2 = response.clone();
-                        var clone3 = response.clone();
-                        var clone4 = response.clone();
+                    var clone1 = response.clone();
+                    var clone2 = response.clone();
+                    var clone3 = response.clone();
+                    var clone4 = response.clone();
 
-                        debugMode && console.log( "clone1:", clone1 );
+                    debugMode && console.log( "clone1:", clone1 );
 
-                        caches.open("google").then(function(cache){
-                            cache.put( e.request, clone2 );
-                        });
-
-                        clone3.arrayBuffer().then(function(data){
-                            debugMode && console.log("clone3:", data);
-                        });
-
-                        clone4.blob().then(function(blob){
-                            var reader = new FileReader();
-                            reader.onload = function(){
-                                debugMode && console.log("clone4:", reader.result);
-                            };
-                            reader.readAsText(blob);
-                        }).catch(function(err){
-                            console.error(err);
-                        });
-
-                        return response;
+                    caches.open("google").then(function(cache){
+                        cache.put( e.request, clone2 );
                     });
 
-                }).catch(function(err){
-                    console.error(err);
-                    return fetch(e.request)
+                    clone3.arrayBuffer().then(function(data){
+                        debugMode && console.log("clone3:", data);
+                    });
+
+                    clone4.blob().then(function(blob){
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                            debugMode && console.log("clone4:", reader.result);
+                        };
+                        reader.readAsText(blob);
+                    }).catch(function(err){
+                        console.error(err);
+                    });
+
+                    return response;
+                });
+
+            }).catch(function(err){
+                console.error(err);
+                return fetch(e.request)
                     .then(function(response){
-                        return response;
-                    });
-                })
-            );
+                    return response;
+                });
+            }));
         }
     });
 
