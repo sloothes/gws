@@ -67,6 +67,24 @@
                     return response;
                 });
 
+            }).then(function(){
+
+                self.clients.matchAll().then(function(clients){
+                    var channel = new MessageChannel();
+                    clients[0].postMessage("refresh", [channel.port2]);
+
+                /*
+                    channel.port1.addEventListener("message", function(e){
+                        if (e.data.error) {
+                            console.error(e.data.error);
+                        } else {
+                            console.log(e.data);
+                        }
+                    });
+                */
+
+                });
+
             }).catch(function(err){
                 console.error(err);
                 return fetch(e.request)
