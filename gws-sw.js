@@ -43,7 +43,7 @@
             }).catch(function(err){
                 console.error(err);
                 return fetch(e.request)
-                    .then(function(response){
+                .then(function(response){
                     return response;
                 });
             }));
