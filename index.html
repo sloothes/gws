@@ -108,17 +108,10 @@ document.body.onload = function(){
                     .find(".gs-webResult.gs-result")
                     .toArray();
                     results.forEach(function(result){
-                        debugMode && console.log(result.innerHTML);
-                    });
-                }, 0);
-
-                setTimeout(function(){
-                    results.forEach(function(result){
+                        debugMode && console.log(result);
                         contentWindow.createResultPegman( result );
                     });
                 }, 0);
-
-
 
             }
 
