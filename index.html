@@ -94,8 +94,9 @@ document.body.onload = function(){
 
             if ( e.data === "refresh" ){
 
-                var contentWindow = viewer.contentWindow;
                 var scene = viewer.contentWindow.scene;
+                var contentWindow = viewer.contentWindow;
+
                 scene.remove.apply(scene, pegmen);  //  important!
 
                 var results = $(".gsc-resultsbox-visible")
