@@ -8,10 +8,6 @@
             url: "/gws/gws-sw.js",
         });
 
-        navigator.serviceWorker.onmessage = function(e){
-            console.log("Client Received Message:", e.data);
-        };
-
     }
 
     function serviceWorkerRegistration( serviceWorker, options ){
@@ -40,10 +36,6 @@
                     if ( this.state === "activated") { 
                         //  do something
                     }
-                });
-
-                newSWController.addEventListener("message", function(e){
-                    console.log("Client Received Message:", e.data);
                 });
 
             });
