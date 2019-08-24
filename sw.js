@@ -8,11 +8,9 @@
             url: "/gws/gws-sw.js",
         });
 
-    /*
-        navigator.serviceWorker.addEventListener("message", function(e){
+        navigator.serviceWorker.onmessage = function(e){
             console.log("Client Received Message:", e.data);
-        });
-    */
+        };
 
     }
 
@@ -36,12 +34,18 @@
             reg.addEventListener("updatefound", function(){
                 var newSWController = reg.installing;
                 debugMode && console.log("new service worker update found:");
+
                 newSWController.addEventListener("statechange", function(){
                     debugMode && console.log({"new sw controller state": this.state});
                     if ( this.state === "activated") { 
                         //  do something
                     }
                 });
+
+                newSWController.addEventListener("message", function(e){
+                    console.log("Client Received Message:", e.data);
+                });
+
             });
 
             //  Refresh to activate the worker.
@@ -49,9 +53,6 @@
             //      location.reload(); return;
             //  } 
 
-            reg.addEventListener("message", function(e){
-                console.log("Client Received Message:", e.data);
-            });
 
 
         }).catch(function(err) { 
