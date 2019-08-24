@@ -28,18 +28,24 @@
                         cache.put( e.request, clone2 );
                     });
 
-                    clone3.arrayBuffer().then(function(data){
-                        debugMode && console.log("clone3:", data);
-                    });
+                //  clone3.arrayBuffer().then(function(data){
+                //      debugMode && console.log("clone3:", data); // is not arraybuffer.
+                //  });
 
                     clone4.blob().then(function(blob){
                         var reader = new FileReader();
                         reader.onload = function(){
-                            debugMode && console.log("clone4:", reader.result);
+                            debugMode && console.log("clone4 dataURL:", reader.result);
                         };
-                        reader.readAsText(blob);
                         reader.readAsDataURL(blob);
-                        reader.readAsArrayBuffer(blob);
+                        return blob;
+                    //  reader.readAsText(blob); // is not text.
+                    //  reader.readAsArrayBuffer(blob); // is not arraybuffer.
+                    }).then(function(blob){
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                            debugMode && console.log("clone4 binaryString:", reader.result);
+                        };
                         reader.readAsBinaryString(blob);
                     }).catch(function(err){
                         console.error(err);
