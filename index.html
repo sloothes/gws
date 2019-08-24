@@ -66,14 +66,15 @@ document.body.onload = function(){
     const cx = "013151438370468652337:0mozxitt4ka";
     const src = "https://cse.google.com/cse.js?cx=013151438370468652337:0mozxitt4ka";
     debugMode && console.log( $("button.gsc-search-button.gsc-search-button-v2").get(0) );
-
+    
     const viewer = document.getElementById("viewer");
+    const searchButton = $("button.gsc-search-button.gsc-search-button-v2").get(0);
 
-    $("button.gsc-search-button.gsc-search-button-v2").on("click", function(){
+    $(searchButton).on("click", function(){
         //  debugMode && console.log( $(".gsc-resultsbox-visible").find(".gsc-expansionArea").get(0) );
         $(".gsc-resultsbox-visible")
             .find(".gsc-expansionArea")
-            .find(".gs-webResult gs-result")
+            .find(".gs-webResult.gs-result")
             .toArray().forEach(function(result){
             debugMode && console.log(result);
         });
