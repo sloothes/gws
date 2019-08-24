@@ -8,13 +8,16 @@
             url: "/gws/gws-sw.js",
         });
 
+    /*
         navigator.serviceWorker.addEventListener("message", function(e){
             console.log("Client Received Message:", e.data);
         });
+    */
 
     }
 
     function serviceWorkerRegistration( serviceWorker, options ){
+
         if (!serviceWorker) {
             console.warn("Oh no! "
                          + "Your browser doesn't support "
@@ -23,10 +26,13 @@
                          + "Try using a different browser.");
             return;
         }
+
         serviceWorker.register(options.url, options.opt).then(function (reg) {
+
             reg.addEventListener("statechange", function(){
                 debugMode && console.log({"reg active state": reg.active.state});
             });
+
             reg.addEventListener("updatefound", function(){
                 var newSWController = reg.installing;
                 debugMode && console.log("new service worker update found:");
@@ -37,10 +43,17 @@
                     }
                 });
             });
+
             //  Refresh to activate the worker.
             //  if (!reg.active) {
             //      location.reload(); return;
             //  } 
+
+            reg.addEventListener("message", function(e){
+                console.log("Client Received Message:", e.data);
+            });
+
+
         }).catch(function(err) { 
             console.error(err);
         });
