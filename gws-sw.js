@@ -11,46 +11,9 @@
     );
 */
 
-    self.addEventListener("fetch", function(e){
-    //  debugMode && console.log( e.request );
+    unistall();
 
-        if (e.request.url.startsWith( "https://cse.google.com/cse/element" ) ) {
-            debugMode && console.log( e.request );
-
-            e.respondWith( caches.match(e.request).then(function(results){
-                return results || fetch(e.request).then(function(response){
-
-                    var clone1 = response.clone();
-                    debugMode && console.log( "clone1:", clone1 );
-
-                    var clone2 = response.clone();
-                    caches.open("google").then(function(cache){
-                        cache.put( e.request, clone2 );
-                    });
-
-                    return response;
-                });
-
-            }).then(function(response){
-
-                self.clients.matchAll().then(function(clients){
-                    var channel = new MessageChannel();
-                    clients[0].postMessage("refresh", [channel.port2]);
-                });
-
-                return response;
-
-            }).catch(function(err){
-                console.error(err);
-                return fetch(e.request)
-                .then(function(response){
-                    return response;
-                });
-            }));
-        }
-    });
-
-
+/*
     self.addEventListener("install", function(e){
 
         self.skipWaiting();
@@ -62,6 +25,7 @@
         self.clients.claim();
 
     });
+*/
 
     function send_message_to_client(client, msg){
         return new Promise(function(resolve, reject){
@@ -102,49 +66,3 @@
     }
 
 
-
-/*
-//  var clone3 = response.clone();
-//  clone3.arrayBuffer().then(function(data){
-//      debugMode && console.log(
-//          "clone3:", data); // is not arraybuffer.
-//  });
-*/
-
-/*
-    var clone4 = response.clone();
-    clone4.blob().then(function(blob){
-        var reader = new FileReader();
-        reader.onload = function(){
-            debugMode && console.log(
-                "clone4 dataURL:", reader.result
-            ); // is not dataURL.
-        };
-        reader.readAsDataURL(blob);
-        return blob;
-        //  reader.readAsText(blob); // is not text.
-        //  reader.readAsArrayBuffer(blob); // is not arraybuffer.
-    }).then(function(blob){
-        var reader = new FileReader();
-        reader.onload = function(){
-            debugMode && console.log(
-                "clone4 binaryString:", reader.result
-            ); // is not binaryString.
-        };
-        reader.readAsBinaryString(blob);
-    }).catch(function(err){
-        console.error(err);
-    });
-*/
-
-//  So what is it? // is a attached json.txt file with type "application/javascript.
-
-/*
-    channel.port1.addEventListener("message", function(e){
-        if (e.data.error) {
-            console.error(e.data.error);
-        } else {
-            console.log(e.data);
-        }
-    });
-*/
